@@ -20,6 +20,7 @@ from api.graph import router as graph_router
 from api.agents import router as agents_router
 from api.data import router as data_router
 from api.intelligent_query import router as intelligent_router
+from api.mvp import router as mvp_router
 from app.main import router as app_router
 
 
@@ -106,7 +107,8 @@ def create_app() -> FastAPI:
 
     # Include routers
     app.include_router(app_router, prefix="", tags=["main"])
-    app.include_router(intelligent_router, tags=["intelligent_query"])  # Primary AI endpoint
+    app.include_router(mvp_router, tags=["mvp_core"])  # Core MVP endpoint (primary)
+    app.include_router(intelligent_router, tags=["intelligent_query"])  # Advanced AI endpoint
     app.include_router(search_router, tags=["search"])
     app.include_router(graph_router, tags=["graph"])
     app.include_router(agents_router, tags=["agents"])
